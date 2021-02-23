@@ -1,1 +1,9 @@
 data/amazon_fine_food_reviews/
+
+classification-nic-last-updated-20210223/*
+!classification-nic-last-updated-20210223/4034-amazon-review-classification-new
+classification-nic-last-updated-20210223/4034-amazon-review-classification-new/*
+!classification-nic-last-updated-20210223/4034-amazon-review-classification-new/data
+classification-nic-last-updated-20210223/4034-amazon-review-classification-new/data/*
+!classification-nic-last-updated-20210223/4034-amazon-review-classification-new/data/LSTM-1layer.h5
+!classification-nic-last-updated-20210223/4034-amazon-review-classification-new/data/LSTM-2layer.h5
