@@ -9,12 +9,13 @@ data         = pd.read_csv(DATA_PATH)
 stop         = False
 idx          = 0
 end          = 332
+target       = 7
 
 
 def annotate(val):
     global idx
     print(f'[Annotate {idx} as {val}]')
-    data.iloc[idx,6] = val
+    data.iloc[idx,target] = val
     idx+=1
     
 def save():
@@ -55,7 +56,8 @@ def main():
         print("[comment]", data.iloc[idx,4])
         print("[rate]",    data.iloc[idx,3])
         print("[predict]", data.iloc[idx,5])
-        print(f"[sentiment {data.iloc[idx,6]}]? ")
+        print("[sentiment 1]",  data.iloc[idx,6])
+        print("[sentiment 2]",  data.iloc[idx,7])
         # do annotate
         with keyboard.Listener(on_release=on_release) as listener:
             listener.join()
