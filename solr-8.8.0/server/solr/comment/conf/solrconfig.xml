@@ -777,6 +777,8 @@
       <!-- Change from JSON to XML format (the default prior to Solr 7.0)
          <str name="wt">xml</str> 
         -->
+		<str name="fl">restaurant,type,reviewer,rating,comment,true_label,pred_label,score</str>
+		<str name="facet.field">pred_label</str>
     </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -971,6 +973,8 @@
       <str name="spellcheck.collateExtendedResults">true</str>
       <str name="spellcheck.maxCollationTries">10</str>
       <str name="spellcheck.maxCollations">5</str>
+		<str name="fl">restaurant,type,reviewer,rating,comment,true_label,pred_label,score</str>
+		<str name="facet.field">pred_label</str>
     </lst>
     <arr name="last-components">
       <str>spellcheck</str>
