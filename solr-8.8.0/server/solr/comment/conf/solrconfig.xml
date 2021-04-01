@@ -973,6 +973,8 @@
       <str name="spellcheck.collateExtendedResults">true</str>
       <str name="spellcheck.maxCollationTries">10</str>
       <str name="spellcheck.maxCollations">5</str>
+	  
+		<str name="echoParams">explicit</str>
 		<str name="fl">restaurant,type,reviewer,rating,comment,true_label,pred_label,score</str>
 		<str name="facet.field">pred_label</str>
     </lst>
