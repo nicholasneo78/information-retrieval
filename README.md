@@ -114,3 +114,72 @@ For spell check usage, the user has to select ‘spell check’ from the drop do
   
 ![demo spell check](./images/11.png)   
    
+### Classification
+Sometimes, a particular user may be interested in looking at other users’ opinions at a particular restaurant or food in order to make an informed decision. As such, sentiment classification of the comments is essential so that the user can quickly decide whether the particular restaurant is of his/her choice based on the positive, neutral and negative comments.  
+  
+#### Tasks
+- Information Extraction  
+	- Text Summarization using Deep Learning  
+	- Sentence Segmentation using POS Tagging  
+- Data Pre-processing Steps for Classification  
+- Evaluation Metrics  
+- Inter-annotator Agreement  
+  
+#### Information Extraction
+**Text Summarization using Deep Learning**  
+Sometimes, we may encounter texts that are very lengthy and we only have a limited amount of time to skim through an article or a webpage. Likewise in our context, users may only be interested in the gist of the content when they seek for restaurant comments made by other users. As such, text summarization is needed in order to keep long descriptions short and sweet.  
+
+Text Summarization is the technique for generating a concise and precise summary of large texts while focusing on the sections that convey useful information and retaining its overall meaning. There are two approaches towards Text Summarization, Extractive Summarization and Abstractive Summarization. Extractive Summarization is an approach that identifies the important sentences or phrases from the original text and extracts only those from the text. There will not be new sentences formed. Abstractive Summarization on the other hand generates new sentences from the original texts. The new sentences may not be present in the original text.  
+
+In our context, we adopted the Abstractive Text Summarization method to summarize our crawled text using the Sequence-to-Sequence (Seq2Seq) model. We used the Abstractive Text Summarization method because it produces more human-like summaries as compared to Extractive Text Summarization. Seq2Seq consists of the Encoder-Decoder Architecture, which is used to solve the Seq2Seq problems where the input and the output sequences are of different lengths. Our Encoder-Decoder Architecture consists of 2 phases, the training phase and the inference phase.  
+
+Here are the steps we adopted for the Text Summarization:  
+  
+![steps for text summarization](./images/12.png)  
+  
+Here are 5 samples of what our Text Summarizer has summarized on the test set: 
+   
+![five samples of text summarizer](./images/13.png)  
+  
+**Sentence Segmentation using POS Tagging**  
+Another technique for information extraction is sentence segmentation. Sentence segmentation is the problem of dividing a string of written language into its component sentences. Usually the sentences are segmented by punctuations. However, in our case, we are interested in extracting the noun, noun phrase, verb and verb phrase from the crawled data using Parts-of-Speech (POS) Tagging.   
+    
+Here are the steps we adopted for the Sentence Segmentation:  
+  
+![steps for text segmentation](./images/14.png)  
+	
+Here are the 5 samples of segmented texts from the text entries:   
+   
+![five samples of text segmentation](./images/15.png)  
+
+#### Data Pre-processing Steps for Classification
+We use LSTM, Bidirectional LSTM and BERT to train our classifier.   
+  
+Here are the data pre-processing steps for the classification task:   
+   
+![steps for classification](./images/16.png)  
+
+#### Evaluation Metrics
+**Evaluation on the validation data**  
+  
+We split our train data into training and validation sets with a ratio of 80:20 and start training the models on three different variations.   
+![evaluation on the validation data](./images/17.png)  
+  
+**Evaluation on the validation data**  
+  
+![evaluation on the test data](./images/18.png)  
+
+**AUC-ROC plot**   
+AUC-ROC plot of all the three models that are considered:   
+  
+![ROCAUC](./images/19.png)  
+   
+#### Inter-annotator Agreement  
+There may be some biases when it comes to rating a comment. Some comments that appear to be positive to one may appear neutral or negative to another and vice versa. Depending on how each user reads the comments and how he/she detects the indirectness in it such as sarcasm, there are bound to be disagreements in giving the rating.   
+In this section, we want to find out how two annotators will annotate a 1000 entries of data sampled from the crawled data. The labels will be either positive (‘1’), neutral (‘0’), or negative (‘1’). We aimed to have an inter-annotator agreement of at least 80% as measured by the cohen-kappa score metric. Inter-annotator agreement is a measure of how well two annotators can make the same annotation decision for the three labels as described (‘1’, ‘0’ or ‘-1’). Cohen-kappa is a statistic that is used to measure the inter-annotator agreement.   
+Cohen-kappa Score: 0.8350   
+   
+Confusion Matrix:   
+  
+![iaa confusion matrix](./images/19.png)    
+
