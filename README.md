@@ -76,4 +76,41 @@ We then make the program crawl iteratively through the 1013 restaurants based on
   
 **Some entries crawled for second level (saved in a .csv file)**  
   
-![crawled examples level 2](./images/6.png) 
+![crawled examples level 2](./images/6.png)  
+
+### Indexing and Querying 
+We have chosen Solr as our indexing system. Solr is an open source enterprise search platform which is written in Java. It provides full-text indexing and searching for structured and unstructured documents. REST-like API with the ability to adjust response format between XML, CSV or JSON makes it easy to integrate with other subsystems.  
+Client apps can reach Solr by creating HTTP requests, then parsing the corresponding HTTP responses.   
+A simple user interface was designed to illustrate the results when a query is made. PySimpleGUI is the Python package used to create our GUI. It is solely based on Tkinter.  
+   
+#### Introduction to Solr
+Solr is a ready-to-use application, however some configurations are still required to provide better performances. In our application, we run the Solr server in standalone mode which means we only host on a single machine. We chose a schemaless implementation which Solr will automatically perform analysis on documents whenever the documentation is posted for indexing, necessary fields and field type will be created and managed by Solr. To prevent incorrect classification of data, one can predefine the fields with web admin interface or use schema API to configure schema.   
+Schema include field and field type definitions. For each field, it can be configured in the field type and properties on how the data will be indexed. For the field type, it provides 3 components to configure which includes analyzer, tokenizer and list of filters which defines the text preprocessing methods. For the analyzer, it allows us to define different sets of rules to be applied for indexing or querying separately. Tokenizer defines a set of rules used to break input sequences into lexical units, for example Solr provides N-Gram Tokenizer to break input sequences into n-gram characters. After the input sequences are tokenized, a set of filters provide the rules for linguistic analysis which includes stopwords elimination, lemmatization, stemming and etc.  
+  
+With reference on field type declaration above, Solr web admin interface provides visual representation on how Solr performs pipelined text pre-processing based for both indexing and query.  
+  
+![solr introduction](./images/7.png)  
+  
+#### Solr Query
+In Solr web admin interface, it provides a very comprehensive query tool for us to play with querying terms with different parameters to see the effect. The table below shows a set of parameters used in our application and their purpose 
+  
+![solr query table](./images/8.png)   
+   
+#### Building a simple web interface for the search engine 
+After importing the PySimpleGUI package, we create a series of widgets, which are called “Element” in PySimpleGUI, for example: Text, InputText and Button.   
+All the elements created are put into a list called “layout”, after that, a “window” is created. It is the parent Element that contains all the other elements. A while loop is then created and the Window’s read() method is called to extract the events and values the user has set.   
+A drop down list is created for the user to choose the function between “search”(select) and “spell check”(spell). By default, it is “search”. The selected term will be passed on to the request-handler(qt) in solr. The wt parameter in the query allows users to select an output format for the chosen API, for this assignment, JSON is selected as it is a more robust response format.A query is sent to solr by using http requests(by importing urllib) and parsing the JSON response(by importing simplejson) instead of using a client API.    
+When using the application, a user can simply type the keywords in the search bar, and select the type of functions they want to perform, namely ‘search’ or ‘spell check’, where a user can use to check if there are any suggestions on the misspelled words.  
+   
+![empty search engine](./images/9.png)  
+
+For searching, after hitting the ‘search’ button, the results will be shown in the output box below. It will first show the number of results found in the database and the query time needed for the search. By default, it will show 10 results per page.  
+For each result shown, it will contain the name of the restaurant, type of the restaurant, name of the reviewer, rating given, comment given, semantic predicted and tf/idf score.  
+A user can then choose to navigate to the previous or next page, or jump to the first or last page based on their current page.  
+  
+![demo search engine](./images/10.png)  
+   
+For spell check usage, the user has to select ‘spell check’ from the drop down bar, type the word and click ‘search’. It will then print out the number of results found containing this keyword and its query time. Other than that, it will also print out the suggested word for correction if there exists one.   
+  
+![demo spell check](./images/11.png)   
+   
