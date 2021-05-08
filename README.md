@@ -1,6 +1,6 @@
 # CE/CZ4034 - Information Retrieval Project
 *A simple search engine project done for the module CE/CZ4034 Information Retrieval in Nanyang Technological University AY2020-21 Semester 2*    
-*A detailed report can be found in Report.pdf in the same repository*   
+*A detailed report can be found in [Report.pdf](https://github.com/nicholasneo78/information-retrieval-4034/blob/main/Report.pdf) in the same repository*   
   
 ### Project Overview
 - Introduction  
